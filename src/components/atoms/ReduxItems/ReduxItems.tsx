@@ -1,4 +1,5 @@
 import { useAppSelector } from "@/src/hooks/useAppSelector";
+import Link from "next/link";
 import React from "react";
 
 type Props = {};
@@ -9,7 +10,7 @@ export default function ReduxItems({}: Props) {
     <div>
       {" "}
       {data.items?.map((it) => (
-        <div key={it}>{it}</div>
+        <div key={it}><Link href={it} >{it}</Link></div>
       ))}
     </div>
   );

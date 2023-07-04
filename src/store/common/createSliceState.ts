@@ -10,6 +10,7 @@ import {
 } from '@reduxjs/toolkit';
 import toast from './toast';
 import loading from './loading';
+import { HYDRATE } from 'next-redux-wrapper';
 
 export type SliceCaseEffects<State> = {
   [K: string]: (
@@ -79,19 +80,21 @@ export default function createSliceState<
     });
   }
 
-  const modal = createSlice({
+  const extra = createSlice({
     ...options,
-    extraReducers: (builder) => {
-      Object.keys(effects).forEach((prefix) => {
-        builder.addCase(effects[prefix]!.fulfilled, (state, action) => {
-          return action.payload;
-        });
-      });
+    extraReducers: {
+      [HYDRATE]: (state, action) => {
+        console.log(action, state)
+        return {
+          ...state,
+          ...action.payload[options.name],
+        };
+      },
     },
   });
 
-  Object.assign(modal.actions, effects);
-  Object.assign(modal, { loadings });
+  Object.assign(extra.actions, effects);
+  Object.assign(extra, { loadings });
 
-  return modal as any;
+  return extra as any;
 }

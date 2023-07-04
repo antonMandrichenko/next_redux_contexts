@@ -1,19 +1,22 @@
-import { PayloadAction } from "@reduxjs/toolkit";
 import createSliceState from "./common/createSliceState";
 import { ClientTestService } from "../services/clientTestService";
 
 export default createSliceState({
   name: "data",
-  initialState: { items: [] } as {items: string[]},
+  initialState: { items: [], item: "" } as { items: string[]; item: string },
   reducers: {
-    set: (state, action) => action.payload,
+    setItems: (state, action) => {
+      return action.payload;
+    },
+    setItem: (state, action) => {
+      return action.payload;
+    },
   },
   effects: {
     get: async (state) => {
-      console.log('get')
       const client = await ClientTestService.initialize();
       const data = await client.getData();
-      return {items: data};
+      return { ...state, items: data };
     },
   },
 });

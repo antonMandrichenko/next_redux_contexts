@@ -1,20 +1,21 @@
 import { configureStore } from '@reduxjs/toolkit'
+import { createWrapper } from 'next-redux-wrapper';
 
 import rootReducer from './reducers'
 
-const store = configureStore({
-  reducer: rootReducer
-})
+const makeStore = () => configureStore({
+  reducer: rootReducer,
+  devTools: true
+},)
+
+const store = makeStore()
 
 export type AppState = ReturnType<typeof rootReducer>;
 
-// if (process.env.NODE_ENV === 'development' && import.meta.hot) {
-//   import.meta.hot?.accept('./rootReducer', () => {
-//     const newRootReducer = require('./rootReducer').default
-//     store.replaceReducer(newRootReducer)
-//   })
-// }
+
 
 export type AppDispatch = typeof store.dispatch
 
-export default store
+export default store;
+
+export const wrapper = createWrapper(makeStore);

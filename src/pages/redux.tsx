@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import { HomePageProps } from "../models/pages/HomePageProps";
 import dynamic from "next/dynamic";
+import { getWrapperServerSideProps } from "../utils/getServerSideProps/getWrapperServerSideProps";
 
 const HomePage = dynamic(
   () => import("../components/pages/HomePageWithRedux"),
@@ -17,3 +18,4 @@ const NewsfeedPage: NextPage<HomePageProps> = (props) => {
 
 export default NewsfeedPage;
 
+export const getServerSideProps = getWrapperServerSideProps;
