@@ -10,12 +10,12 @@ const HomePage = dynamic(
   }
 );
 
-const NewsfeedPage: NextPage<HomePageProps> = (props) => {
+const ReduxPage: NextPage<HomePageProps> = (props) => {
   return (
       <HomePage />
   );
 };
 
-export default NewsfeedPage;
+export default ReduxPage;
 
 export const getServerSideProps = getWrapperServerSideProps;

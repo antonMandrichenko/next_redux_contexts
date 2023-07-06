@@ -1,10 +1,10 @@
 import type { NextPage } from "next";
 import dynamic from "next/dynamic";
-import { HomePageProps } from "../models/pages/HomePageProps";
-import { getItemServerSideProps } from "../utils/getServerSideProps/getItemServerSideProps";
+import { HomePageProps } from "../../models/pages/HomePageProps";
+import { getItemServerSideProps } from "../../utils/getServerSideProps/getItemServerSideProps";
 
 const ReduxItem = dynamic(
-  () => import("../components/atoms/ReduxItem/ReduxItem"),
+  () => import("../../components/atoms/ReduxItem/ReduxItem"),
   {
     ssr: true,
   }

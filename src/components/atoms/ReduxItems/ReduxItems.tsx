@@ -10,7 +10,7 @@ export default function ReduxItems({}: Props) {
     <div>
       {" "}
       {data.items?.map((it) => (
-        <div key={it}><Link href={it} >{it}</Link></div>
+        <div key={it}><Link href={`/tasks/${it}`} >{it}</Link></div>
       ))}
     </div>
   );

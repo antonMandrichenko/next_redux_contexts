@@ -15,6 +15,9 @@ export default function index({}: Props) {
       <Link href={"/redux"}>
         <button>redux</button>
       </Link>
+      <Link href={"/socket"}>
+        <button>socket</button>
+      </Link>
     </div>
   );
 }
