@@ -1,27 +1,25 @@
 import type { NextPage } from "next";
 import { useSocket } from "../hooks/useSocket";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const SocketPage: NextPage<{}> = () => {
+  const [data, setData] = useState("");
 
-    const socket = useSocket('/api/io')
+  const socket = useSocket("/api/io");
 
-    useEffect(() => {
-        if (socket) {
-          socket.on('noArg', () => {
-            console.log('noArg');
-          });
-        //   socket.on('a user connected', () => {
-        //     setUser('a user connected');
-        //   });
-        }
-      }, [socket]);
-
+  useEffect(() => {
+    if (socket) {
+      socket.on("fromServer", (data: string) => {
+        setData(data)
+      });
+    }
+  }, [socket]);
 
   return (
-    // <SocketProvider>
+    <>
       <div>socket</div>
-    // </SocketProvider>
+      <div>{data}</div>
+    </>
   );
 };
 

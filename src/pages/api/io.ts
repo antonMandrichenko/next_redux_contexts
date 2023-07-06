@@ -35,10 +35,9 @@ export default async function SocketHandler(
       addTrailingSlash: false,
     });
     res.socket.server.io = io;
-    
+
     io.use((socket, next) => {
       const header = socket.handshake.headers["authorization"];
-      console.log("header", header);
       if (!isValidJwt(header ?? "")) {
         //to handle unauthosized logic
         return next(new Error('authentication error'));
@@ -46,10 +45,11 @@ export default async function SocketHandler(
       return next()
     });
     io.on("connection", (socket) => {
+      console.log('connect', socket.id)
       socket.on("hello", () => {
         console.log("hello");
       });
-      socket.emit("noArg");
+      socket.emit("fromServer", 'fromServerData string');
     });
   }
   res.end();

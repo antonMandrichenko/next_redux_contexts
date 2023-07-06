@@ -17,9 +17,7 @@ export interface NextApiResponseWithSocket extends NextApiResponse {
 
 //events from server to client
 export interface ServerToClientEvents {
-  noArg: () => void;
-  basicEmit: (a: number, b: string, c: Buffer) => void;
-  withAck: (d: string, callback: (e: number) => void) => void;
+  fromServer: (data:string ) => void
 }
 
 //events from client to server
