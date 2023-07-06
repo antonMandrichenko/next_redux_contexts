@@ -8,9 +8,18 @@ export function useSocket(url: string) {
       fetch(url).finally(() => {
         const socketio = io({
             path: '/api/socket_io',
+            //athorization for socket
+            transportOptions: {
+                polling: {
+                  extraHeaders: {
+                    'Authorization': 'Bearer abc',
+                  },
+                },
+              },
             });
         socketio.on('connect', () => {
-          console.log('connect');
+          console.log('connect', socketio.id);
+          //send event to server
           socketio.emit('hello');
         });
         socketio.on('disconnect', () => {
